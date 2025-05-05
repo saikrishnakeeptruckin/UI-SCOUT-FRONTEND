@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,4 +35,130 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Add these styles to src/App.css */
+
+.image-list-card {
+  /* Optional: Add specific styling if needed */
+}
+
+.image-list-card h2 {
+    /* Make heading consistent */
+    margin-top: 0;
+    margin-bottom: 15px; /* Adjusted spacing */
+    color: #3498db;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.image-list {
+  list-style: none; /* Remove default bullets */
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* Limit height and add scroll if many files */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  border: 1px solid #eee; /* Optional border */
+  border-radius: 4px;
+}
+
+.image-list li {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f0f0f0; /* Separator line */
+  font-size: 0.95em;
+  color: #333;
+}
+
+.image-list li:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+/* Style for the "No images" message */
+.image-list-card p {
+    color: #7f8c8d;
+}
+
+
+/* Add/Modify styles in src/App.css for the new results display */
+
+.results-content {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.best-match-details h3 {
+  margin-top: 0;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.best-match-details h4 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #3498db;
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+.match-header p {
+    margin: 0 10px 5px 0; /* Spacing between items */
+}
+
+
+.match-image-container {
+    text-align: center; /* Center the image */
+    margin-bottom: 20px;
+    max-height: 400px; /* Limit image height */
+    overflow: hidden; /* Hide overflow if image is too tall */
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.match-image {
+  max-width: 100%; /* Ensure image fits container */
+  height: auto;    /* Maintain aspect ratio */
+  max-height: 390px; /* Slightly less than container */
+  display: block;  /* Remove extra space below image */
+  margin: 0 auto;  /* Center image if container is wider */
+}
+
+.match-text p,
+.match-text ul {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: #333;
+}
+
+ .match-text ul.detail-list {
+    list-style: disc; /* Use standard bullet points */
+    padding-left: 25px; /* Indent list */
+    margin-top: 5px;
+}
+ .match-text ul.detail-list li {
+     margin-bottom: 5px;
+ }
+
+
+.best-match-details hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+.best-match-details em {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    display: block; /* Ensure italics are on their own line */
+    margin-top: 5px;
 }

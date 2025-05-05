@@ -7,17 +7,16 @@ function ImageUploader() {
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    clearUploadStatus(); // Clear previous messages on new selection
+    clearUploadStatus(); 
   };
 
   const onUploadClick = useCallback(() => {
     if (selectedFile) {
       handleUpload(selectedFile).then(() => {
-         // Only clear selection on successful context handling (optional)
-         setSelectedFile(null);
-         document.getElementById('fileInput').value = null; // Reset file input visually
+          setSelectedFile(null);
+          document.getElementById('fileInput').value = null;
       }).catch(() => {
-          // Error already handled in context, maybe add specific UI feedback here if needed
+          console.error('Upload failed');
       });
     }
   }, [selectedFile, handleUpload]);
@@ -25,18 +24,25 @@ function ImageUploader() {
   return (
     <section className="card">
       <h2>1. Upload Reference/Query Images</h2>
-      <input
-        type="file"
-        id="fileInput"
-        accept="image/png, image/jpeg"
-        onChange={handleFileChange}
-        disabled={isLoading}
-      />
-      <button onClick={onUploadClick} disabled={isLoading || !selectedFile}>
-        {isLoading ? 'Uploading...' : 'Upload Image'}
-      </button>
-      {uploadError && <p className="error-message">Upload Error: {uploadError}</p>}
-      {uploadSuccess && <p className="success-message">{uploadSuccess}</p>}
+      <div className="centered-form-container">
+        <div className="upload-form-group">
+          <input
+            type="file"
+            id="fileInput"
+            accept="image/png, image/jpeg"
+            onChange={handleFileChange}
+            disabled={isLoading}
+            className="file-input"
+          />
+          <div className="form-button-container">
+            <button onClick={onUploadClick} disabled={isLoading || !selectedFile}>
+              {isLoading ? 'Uploading...' : 'Upload Image'}
+            </button>
+          </div>
+        </div>
+        {uploadError && <p className="error-message center-text">{uploadError}</p>}
+        {uploadSuccess && <p className="success-message center-text">{uploadSuccess}</p>}
+      </div>
     </section>
   );
 }

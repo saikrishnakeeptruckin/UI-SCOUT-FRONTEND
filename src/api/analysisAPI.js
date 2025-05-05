@@ -22,7 +22,7 @@ export const uploadImageApi = async (file) => {
 
 export const analyzeImageApi = async (filename, prompt) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/analyze`, {
+    const response = await axios.post(`${API_BASE_URL}/analyze-combined`, {
       filename: filename,
       prompt: prompt,
     }, {

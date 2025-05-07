@@ -1,10 +1,9 @@
-// src/App.js - Changes shown with comments
+// src/App.js
 
 import React from 'react';
 import { AppProvider } from './context/AppContext';
 import ImageUploader from './components/ImageUploader';
-import ImageList from './components/ImageList'; // <<<--- 1. Import the new component
-import AnalysisForm from './components/AnalysisForm';
+import ImageList from './components/ImageList';
 import ResultsDisplay from './components/ResultsDisplay';
 import './App.css';
 
@@ -18,9 +17,8 @@ function App() {
         </header>
 
         <main>
+          <ImageList />
           <ImageUploader />
-          <ImageList /> {/* <<<--- 2. Add the ImageList component here */}
-          <AnalysisForm />
           <ResultsDisplay />
         </main>
 

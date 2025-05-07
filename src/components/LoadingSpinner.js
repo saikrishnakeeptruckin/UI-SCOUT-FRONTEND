@@ -1,5 +1,5 @@
 import React from 'react';
-import './LoadingSpinner.css'; // Create this CSS file
+import './LoadingSpinner.css';
 
 function LoadingSpinner({ message = 'Loading...' }) {
   return (

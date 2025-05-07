@@ -6,7 +6,6 @@ function AnalysisForm() {
   const [queryFilename, setQueryFilename] = useState('');
   const [prompt, setPrompt] = useState('');
   
-  // Base URL for images
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:5000';
 
   useEffect(() => {
@@ -54,7 +53,6 @@ function AnalysisForm() {
           </select>
         </div>
 
-        {/* Display the selected image */}
         {queryFilename && (
           <div className="selected-image-container">
             <h4>Selected Query Image:</h4>

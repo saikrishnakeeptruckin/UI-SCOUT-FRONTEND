@@ -1,5 +1,5 @@
 import React, { createContext, useState, useCallback, useEffect } from 'react';
-import { uploadImageApi, analyzeImageApi, listImagesApi } from '../api/analysisAPI'; // We'll create this file next
+import { uploadImageApi, analyzeImageApi, analyzeTagsImageApi, listImagesApi } from '../api/analysisAPI'; // We'll create this file next
 
 // Create the context
 export const AppContext = createContext();
@@ -100,6 +100,44 @@ const handleAnalyze = useCallback(async (filename, prompt) => {
   }
 }, []); // Empty dependency array
 
+
+
+const handleAnalyzeTags = useCallback(async (filename, prompt) => {
+  if (!filename || !prompt) {
+    setError('Filename and prompt are required for analysis.');
+    return;
+  }
+  setError('');
+  setAnalysisResult(null);
+  setIsLoading(true);
+  try {
+    const responseData = await analyzeTagsImageApi(filename, prompt);
+    // analysisResult now directly holds the single best match object OR an error/message object
+    setAnalysisResult(responseData);
+    console.log("Analysis Response in Context:", responseData);
+
+    // Check if the response itself indicates a backend-handled error or message
+    if (responseData.error) {
+        console.error("Backend returned an error:", responseData.error);
+        setError(responseData.error); // Set context error state as well
+    } else if (responseData.message) {
+         console.info("Backend returned a message:", responseData.message);
+         // Keep message in analysisResult, don't set top-level error
+    }
+
+  } catch (err) {
+    console.error("Analysis API call error in context:", err);
+    const errorMsg = err.message || 'Analysis failed during API call.';
+    // Store error structure consistent with backend error format
+    setAnalysisResult({ error: errorMsg });
+    setError(errorMsg); // Also set top-level error
+  } finally {
+    setIsLoading(false);
+  }
+});
+
+
+
   // Clear errors/success messages
   const clearUploadStatus = useCallback(() => {
       setUploadError('');
@@ -121,6 +159,7 @@ const handleAnalyze = useCallback(async (filename, prompt) => {
   uploadSuccess,
   handleUpload,
   handleAnalyze,
+  handleAnalyzeTags,
   clearUploadStatus,
   clearAnalysisStatus,
   // fetchUploadedFiles, // Optionally expose if manual refresh is needed

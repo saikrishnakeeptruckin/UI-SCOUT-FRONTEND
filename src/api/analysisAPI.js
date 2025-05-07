@@ -37,6 +37,23 @@ export const analyzeImageApi = async (filename, prompt) => {
   }
 };
 
+export const analyzeTagsImageApi = async (filename, prompt) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/analyze-tags`, {
+      filename: filename,
+      prompt: prompt,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data; // e.g., { best_match: {...}, ... } or { message: '...', ... } or { error: '...' }
+  } catch (err) {
+     // Throw a more specific error message from the response if possible
+    throw new Error(err.response?.data?.error || err.response?.data?.message || err.message || 'Failed to analyze image.');
+  }
+};
+
 export const listImagesApi = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/list-images`);

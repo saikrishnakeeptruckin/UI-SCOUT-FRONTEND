@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AppContext } from '../context/AppContext';
 
 function AnalysisForm() {
-  const { uploadedFiles, isLoading, handleAnalyze, clearAnalysisStatus } = useContext(AppContext);
+  const { uploadedFiles, isLoading, handleAnalyze, handleAnalyzeTags, clearAnalysisStatus } = useContext(AppContext);
   const [queryFilename, setQueryFilename] = useState('');
   const [prompt, setPrompt] = useState('');
   
@@ -16,6 +16,7 @@ function AnalysisForm() {
   const onAnalyzeClick = () => {
     if (queryFilename && prompt.trim()) {
       handleAnalyze(queryFilename, prompt.trim());
+      // handleAnalyzeTags(queryFilename, prompt.trim());
     }
   };
 
